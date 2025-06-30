@@ -6,12 +6,21 @@ const crypto = require("crypto");
 
 const app = express();
 const server = http.createServer(app);
+
+// Use CLIENT_URL from .env, split by comma for multiple origins
+const allowedOrigins = (
+  process.env.CLIENT_URL ||
+  "http://localhost:3000,https://sign-cardclash.vercel.app"
+).split(",");
+
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://sign-cardclash.vercel.app"],
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
   },
 });
+
+// ... (rest of your 658-line index.js remains unchanged)
 
 // In-memory game storage
 const games = new Map();
