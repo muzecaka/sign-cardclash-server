@@ -112,7 +112,7 @@ io.on("connection", (socket) => {
         currentTurn: null,
         turnOrder: [],
         status: "lobby",
-        maxPlayers: Math.min(playerCount, 5),
+        maxPlayers: Math.min(playerCount, 10),
         roundTimeLimit: roundTimeLimit || 0,
         roundTimer: null,
         chatMessages: [],
@@ -175,7 +175,7 @@ io.on("connection", (socket) => {
       io.to(gameId).emit("gameData", { game });
     } else {
       if (game.players.length >= game.maxPlayers) {
-        socket.emit("joinError", { message: "Maximum players reached (5)." });
+        socket.emit("joinError", { message: "Maximum players reached (10)." });
         return;
       }
       if (
